@@ -10,11 +10,11 @@ public class StreamingService {
         this.ui = ui;
     }
 
-    public void createUser(){
+    private void createUser(){
         String username = ui.promptText("Indtast ønsket brugernavn");
         String password = ui.promptText("Indtast password");
 
-        if(username.isEmpty() || password.isEmpty()){
+        if(username.isBlank() || password.isBlank()){
             ui.displayMessage("Brugernavn og password må ikke være blankt");
             return;
         }
@@ -28,6 +28,32 @@ public class StreamingService {
         currentUser = user;
         ui.displayMessage("Brugeren er oprettet, velkommen " + currentUser.getUsername() + "!");
     }
+
+    private void login(){
+        String username = ui.promptText("Indtast dit brugernavn");
+        String password = ui.promptText("Indtast dit password");
+
+        User user = findUser(username);
+        if(user != null && user.getPassword().equals(password)){
+            currentUser = user;
+            ui.displayMessage("Velkommen tilbage, " + username + "!");
+        }
+        else{
+            ui.displayMessage("Forkert brugernavn eller passwordd");
+        }
+
+    }
+
+    private User findUser(String username){
+        for (User u : users){
+            if (u.getUsername().equals(username)){
+                return u;
+            }
+        }
+        return null;
+    }
+
+
 
     public void playSeries(Series series) {
 
