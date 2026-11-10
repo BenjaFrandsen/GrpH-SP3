@@ -6,7 +6,6 @@ public class User {
     private String password;
     private ArrayList<Media> watched;
     private ArrayList<Media> saved;
-    private TextUI ui = new TextUI();
 
     public User(String username, String password){
         this.username = username;
@@ -26,18 +25,15 @@ public class User {
     public void addToWatched(Media m){
         if(! watched.contains(m)){
             watched.add(m);
-            ui.displayMessage(m.getTitle() + " blev tilføjet til din liste over sete medier");
         }
     }
 
     public boolean addToSaved(Media m){
         if(! saved.contains(m)){
             saved.add(m);
-            ui.displayMessage(m.getTitle() + " blev tilføjet til din liste over gemte medier");
             return true;
         }
         else{
-            ui.displayMessage(m.getTitle() + " er allerede på din liste over gemte medier");
             return false;
         }
     }
@@ -45,11 +41,9 @@ public class User {
     public boolean removeFromSaved(Media m){
         if(saved.contains(m)){
             saved.remove(m);
-            ui.displayMessage(m.getTitle() + " blev fjernet fra din liste over gemte medier");
             return true;
         }
         else{
-            ui.displayMessage(m.getTitle() + " kunne ikke fjernes, da den ikke er på din liste over gemte medier");
             return false;
         }
     }
