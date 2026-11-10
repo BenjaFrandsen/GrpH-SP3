@@ -14,6 +14,7 @@ class StreamingService {
 + void startSession()
 - void loadUsers()
 - void loadMedia()
+- void findUser(String username)
 - void saveUsers()
 - void startMenu()
 - void login()
