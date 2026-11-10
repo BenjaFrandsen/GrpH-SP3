@@ -1,0 +1,31 @@
+@startuml
+object StreamingService
+object User
+object Media
+object Movie
+object Series
+object Season
+object Episode
+object Category
+object WatchedList
+object SavedList
+
+StreamingService *-- User
+StreamingService *-- "1" Media : has-a
+
+Media <|-- "1..*" Movie : is - a
+Media <|-- "1..*" Series : is - a
+
+Series *-- "1..*" Season : has-a
+Season *-- "1..*" Episode : has-a
+
+Media <|-- "1..*" Category
+Movie <|-- Category : has-a
+Series <|-- Category : has-a
+
+User *-- "1" WatchedList : has-a
+User *-- "1" SavedList : has-a
+
+WatchedList o-- "1" Media
+SavedList o-- "1" Media
+@enduml

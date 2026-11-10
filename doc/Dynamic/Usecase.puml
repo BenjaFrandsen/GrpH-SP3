@@ -1,0 +1,42 @@
+@startuml
+!pragma layout smetana
+
+actor user
+
+usecase StartProgram
+usecase UserHandler
+usecase MainMenu
+usecase SearchByTitle
+usecase SearchByCategory
+usecase ShowWatched
+usecase ShowSaved
+usecase ChooseMedia
+usecase PlayMedia
+usecase MediaSaveHandler
+usecase Logout
+
+user --> StartProgram
+StartProgram --> UserHandler
+
+UserHandler --> MainMenu
+
+MainMenu <--> SearchByTitle
+MainMenu <--> SearchByCategory
+MainMenu <--> ShowWatched
+MainMenu <--> ShowSaved
+MainMenu --> Logout
+
+SearchByTitle --> ChooseMedia
+SearchByCategory --> ChooseMedia
+ShowWatched --> ChooseMedia
+ShowSaved --> ChooseMedia
+
+ChooseMedia --> MainMenu
+ChooseMedia --> PlayMedia
+ChooseMedia --> MediaSaveHandler
+
+PlayMedia --> ChooseMedia
+MediaSaveHandler --> ChooseMedia
+@enduml
+
+samle search

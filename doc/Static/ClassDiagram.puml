@@ -1,0 +1,115 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!pragma layout smetana
+
+class StreamingService {
+- ArrayList<User> users
+- ArrayList<Media> media
+- User currentUser
+- TextUI ui
+- FileIO io g
+
++ static void main(String[] args)
++ void startSession()
+- void loadUsers()
+- void loadMedia()
+- void saveUsers()
+- void startMenu()
+- void login()
+- void createUser()
+- void mainMenu()
+- void searchByTitle()
+- void searchByCategory()
+- void showWatched()
+- void showSaved()
+- void chooseMedia(ArrayList<Media> list)
+- void mediaMenu(Media m)
+- void playMedia(Media m)
+- void saveMedia(Media m)
+- void removeMedia(Media m)
+- void endSession()
+}
+
+class TextUI{
+- Scanner scan
++ boolean promptBinary(String msg)
++ String promptText(String msg)
++ int promptNumeric(String msg)
++ ArrayList<String> promptChoice(ArrayList<String> options, int limit, String msg)
++ void displayMessage(String msg)
++ void displayList(ArrayList<String> list, String msg)
+}
+
+class FileIO{
++ void saveData(ArrayList<String> data, String path, String header)
++ ArrayList<String> readData(String path)
++ String[] readData(String path, int length)
+}
+
+class User {
+- String username
+- String password
+- ArrayList<Media> watched
+- ArrayList<Media> saved
+
++ String getUsername()
++ boolean checkPassword(String password)
++ void addToWatched(Media m)
++ boolean addToSaved(Media m)
++ boolean removeFromSaved(Media m)
++ ArrayList<Media> getWatched()
++ ArrayList<Media> getSaved()
+}
+
+abstract class Media{
+- String title
+- int releaseYear
+- double rating
+- ArrayList<String> categories
+
++ String getTitle()
++ int getReleaseYear()
++ double getRating()
++ ArrayList<String> getCategories()
++ boolean hasCategory(String category)
++ String toString()
+}
+
+class Movie{
+}
+
+class Series{
+-int endYear
+- ArrayList<Season> seasons
+
++ ArrayList<Season> getSeasons()
++ String toString()
+}
+
+class Season{
+- int seasonNumber
+- ArrayList<Episode> episodes
+
++ int getSeasonNumber()
++ ArrayList<Episode> getEpisodes()
+}
+
+class Episode{
+- int episodeNumber
+
++ int getEpisodeNumber()
+}
+
+StreamingService *-- TextUI
+StreamingService *-- FileIO
+StreamingService *-- "*" User
+StreamingService *-- "*" Media
+User o-- "*" Media : watched / saved
+
+Media <|-- Movie
+Media <|-- Series
+Series *-- "1..*" Season
+Season *-- "1..*" Episode
+
+@enduml
