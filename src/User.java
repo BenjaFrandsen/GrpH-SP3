@@ -18,6 +18,10 @@ public class User {
         return username;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public boolean checkPassword(String password){
         return password.equals(this.password);
     }
