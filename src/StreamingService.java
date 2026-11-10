@@ -3,9 +3,30 @@ import java.util.ArrayList;
 public class StreamingService {
 
     private TextUI ui;
+    private ArrayList<User> users = new ArrayList<>();
+    private User currentUser;
 
     public StreamingService(TextUI ui) {
         this.ui = ui;
+    }
+
+    public void createUser(){
+        String username = ui.promptText("Indtast ønsket brugernavn");
+        String password = ui.promptText("Indtast password");
+
+        if(username.isEmpty() || password.isEmpty()){
+            ui.displayMessage("Brugernavn og password må ikke være blankt");
+            return;
+        }
+        if(username.contains(";") || password.contains(";")){
+            ui.displayMessage("Du må ikke bruge semikolon");
+            return;
+        }
+
+        User user = new User(username, password);
+        users.add(user);
+        currentUser = user;
+        ui.displayMessage("Brugeren er oprettet, velkommen " + currentUser.getUsername() + "!");
     }
 
     public void playSeries(Series series) {
