@@ -4,12 +4,15 @@ public class User {
 
     private String username;
     private String password;
-    private ArrayList<Media> watched = new ArrayList<>();
-    private ArrayList<Media> saved = new ArrayList<>();
+    private ArrayList<Media> watched;
+    private ArrayList<Media> saved;
     private TextUI ui = new TextUI();
 
-    public User(){
-
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+        this.watched = new ArrayList<>();
+        this.saved = new ArrayList<>();
     }
 
     public String getUsername(){
@@ -39,6 +42,24 @@ public class User {
         }
     }
 
+    public boolean removeFromSaved(Media m){
+        if(saved.contains(m)){
+            saved.remove(m);
+            ui.displayMessage(m.getTitle + " blev fjernet fra din liste over gemte medier");
+            return true;
+        }
+        else{
+            ui.displayMessage(m.getTitle + " kunne ikke fjernes, da den ikke er på din liste over gemte medier");
+            return false;
+        }
+    }
 
+    public ArrayList<Media> getWatched(){
+        return watched;
+    }
+
+    public ArrayList<Media> getSaved(){
+        return saved;
+    }
 
 }
