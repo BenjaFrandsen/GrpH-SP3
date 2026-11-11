@@ -1,20 +1,33 @@
 import java.util.ArrayList;
 
-public class Series {
+public class Series extends Media {
 
-    private String title;
+    private int endYear;
     private ArrayList<Season> seasons;
 
-    public Series(String title, ArrayList<Season> seasons) {
-        this.title = title;
-        this.seasons = seasons;
-    }
 
-    public String getTitle() {
-        return title;
+    public Series(String title, int releaseYear, int endYear, double rating, ArrayList<String> categories, ArrayList<Season> seasons) {
+        super(title, releaseYear, rating, categories);
+        this.endYear = endYear;
+        this.seasons = seasons;
     }
 
     public ArrayList<Season> getSeasons() {
         return seasons;
     }
+
+
+    @Override
+    public String toString(){
+        String stillAiring;
+        if(endYear ==-1) {
+            stillAiring = "still airing";
+        } else {
+            stillAiring = "ended" + endYear;
+        }
+        return super.toString() + " - " + stillAiring + " - " + seasons.size() + " seasons ";
+    }
+
+
+
 }

@@ -97,7 +97,15 @@ public class TextUI {
 
     public int promptMenuChoice(ArrayList<String> menu, String msg) {
         displayList(menu, msg, true);
-        int input = this.promptNumeric("tast et tal");
-        return input;
+        while(true) {
+            int input = this.promptNumeric("tast et tal");
+
+            if(input <= menu.size() && input >= 1) {
+                return input;
+            }
+            else {
+                System.out.println("Not a valid choice");
+            }
+        }
     }
 }
