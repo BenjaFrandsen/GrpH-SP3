@@ -3,10 +3,57 @@ import java.util.ArrayList;
 public class StreamingService {
 
     private TextUI ui;
+    private ArrayList<User> users = new ArrayList<>();
+    private User currentUser;
 
     public StreamingService(TextUI ui) {
         this.ui = ui;
     }
+
+    private void createUser(){
+        String username = ui.promptText("Indtast ønsket brugernavn");
+        String password = ui.promptText("Indtast password");
+
+        if(username.isBlank() || password.isBlank()){
+            ui.displayMessage("Brugernavn og password må ikke være blankt");
+            return;
+        }
+        if(username.contains(";") || password.contains(";")){
+            ui.displayMessage("Du må ikke bruge semikolon");
+            return;
+        }
+
+        User user = new User(username, password);
+        users.add(user);
+        currentUser = user;
+        ui.displayMessage("Brugeren er oprettet, velkommen " + currentUser.getUsername() + "!");
+    }
+
+    private void login(){
+        String username = ui.promptText("Indtast dit brugernavn");
+        String password = ui.promptText("Indtast dit password");
+
+        User user = findUser(username);
+        if(user != null && user.getPassword().equals(password)){
+            currentUser = user;
+            ui.displayMessage("Velkommen tilbage, " + username + "!");
+        }
+        else{
+            ui.displayMessage("Forkert brugernavn eller passwordd");
+        }
+
+    }
+
+    private User findUser(String username){
+        for (User u : users){
+            if (u.getUsername().equals(username)){
+                return u;
+            }
+        }
+        return null;
+    }
+
+
 
     public void playSeries(Series series) {
 
