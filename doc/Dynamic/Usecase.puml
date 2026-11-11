@@ -4,7 +4,7 @@
 actor user
 
 usecase StartProgram
-usecase UserHandler
+usecase Login
 usecase MainMenu
 usecase SearchByTitle
 usecase SearchByCategory
@@ -16,9 +16,9 @@ usecase MediaSaveHandler
 usecase Logout
 
 user --> StartProgram
-StartProgram --> UserHandler
+StartProgram --> Login
 
-UserHandler --> MainMenu
+Login --> MainMenu
 
 MainMenu <--> SearchByTitle
 MainMenu <--> SearchByCategory
