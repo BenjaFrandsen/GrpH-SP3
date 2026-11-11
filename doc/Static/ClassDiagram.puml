@@ -3,14 +3,17 @@
 
 !pragma layout smetana
 
+class Main {
++ static void main(String[] args)
+}
+
 class StreamingService {
 - ArrayList<User> users
 - ArrayList<Media> media
 - User currentUser
 - TextUI ui
-- FileIO io g
+- FileIO io
 
-+ static void main(String[] args)
 + void startSession()
 - void loadUsers()
 - void loadMedia()
@@ -101,7 +104,7 @@ class Episode{
 
 + int getEpisodeNumber()
 }
-
+Main <|-- StreamingService
 StreamingService *-- TextUI
 StreamingService *-- FileIO
 StreamingService *-- "*" User
