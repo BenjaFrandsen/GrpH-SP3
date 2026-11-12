@@ -399,7 +399,7 @@ public class StreamingService {
                 results.add(m);
             }
         }
-        showResults(results);
+        chooseMedia(results);
         return results;
     }
 
@@ -411,7 +411,7 @@ public class StreamingService {
                 results.add(m);
             }
         }
-        showResults(results);
+        chooseMedia(results);
         return results;
     }
 
@@ -429,7 +429,7 @@ public class StreamingService {
             ui.displayMessage("Utilgængelig film bedømmelse");
             return results;
         }
-        showResults(results);
+        chooseMedia(results);
         return results;
     }
 
@@ -465,6 +465,53 @@ public class StreamingService {
 
     private void removeFromSaved(Media media) {
         currentUser.removeFromSaved(media);
+    }
+
+
+
+
+
+
+
+
+    private void chooseMedia(ArrayList<Media> list){
+        if (list.isEmpty()){
+            ui.displayMessage("Ingen resultater");
+            return;
+        }
+        ArrayList<String> titles= new ArrayList<>();
+        for(Media m : list){
+            titles.add(m.getTitle());
+        }
+
+        int choice = ui.promptMenuChoice(titles, "Vælg en titel");
+        mediaMenu(list.get(choice-1));
+    }
+
+    private void mediaMenu(Media m){
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Afspil");
+        options.add("Gem");
+        options.add("Gå tilbage");
+
+        int choice = ui.promptMenuChoice(options, m.getTitle());
+
+        if(choice == 1){
+            playMedia(m);
+        }
+        else if(choice == 2){
+            saveMedia(m);
+        }
+    }
+
+    private void playMedia(Media m){
+        if(m instanceof Series){
+            playSeries((Series) m);
+        }
+        else{
+            ui.displayMessage(m.getTitle() + " afspilles nu");
+        }
+        currentUser.addToWatched(m);
     }
 
 
