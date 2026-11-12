@@ -32,8 +32,8 @@ public abstract class Media {
     }
 
     public boolean hasCategory(String category) {
-        for (String c: categories) {
-            if(Boolean.parseBoolean(c.toLowerCase(Locale.of(category)))) {
+        for (String c : categories) {
+            if (c.equalsIgnoreCase(category.trim())) {
                 return true;
             }
         }

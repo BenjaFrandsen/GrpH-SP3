@@ -109,10 +109,8 @@ public class TextUI {
         }
     }
 
-    public void displayMessage(ArrayList<String> texts, String s, boolean b) {
-    }
 
     public void displayMessage(ArrayList<String> texts, String s) {
-
+        displayList(texts, s, false);
     }
 }

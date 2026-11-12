@@ -153,7 +153,8 @@ public class StreamingService {
         menuOptions.add("2) Søg alle film i bestemt kategori");
         menuOptions.add("3) Se din liste over gemte film");
         menuOptions.add("4) Se din liste over sete film");
-        menuOptions.add("5) Forlad program");
+        menuOptions.add("5) Søg efter rating");
+        menuOptions.add("6) Forlad program");
 
         while (currentUser != null){
             int choice = ui.promptMenuChoice(menuOptions, "Vælg en mulighed");
@@ -170,8 +171,10 @@ public class StreamingService {
                     break;
                 case 4:
                     showWatched();
-                    break;
                 case 5:
+                    searchByRating();
+                    break;
+                case 6:
                     endSession();
                     break;
                 default:
