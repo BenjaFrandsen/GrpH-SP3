@@ -38,7 +38,7 @@ public class FileIO {
             scanner.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + path);
+            System.out.println("Fil ikke fundet: " + path);
         }
 
         return data;
@@ -60,7 +60,7 @@ public class FileIO {
             scanner.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + path);
+            System.out.println("Fil ikke fundet: " + path);
         }
 
         return data;

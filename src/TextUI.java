@@ -16,17 +16,6 @@ public class TextUI {
         System.out.println(message);
     }
 
-    public boolean promptBinary(String msg) {
-        String input = promptText(msg).toLowerCase();
-        if (input.equals("y")) {
-            return true;
-        }
-
-        if (input.equals("n")) {
-            return false;
-        }
-        return promptBinary(msg);
-    }
 
     public int promptNumeric(String msg) {
         System.out.println(msg);
@@ -49,7 +38,6 @@ public class TextUI {
 
         for (int i = 0; i < list.size(); i++) {
 
-            // String s = numbered?i+1+". "+ list.get(i):list.get(i);
             String s;
             if (numbered) {
                 s = i + 1 + ". " + list.get(i);
@@ -61,25 +49,11 @@ public class TextUI {
             System.out.println(s);
         }
 
-       /*
-       int i = 0;
-       for(String s : list){
-            // s = list.get(i);
-            System.out.println(s);
-            i++;
-
-        }
-
-        */
-
-
     }
 
     public ArrayList<String> promptChoice(ArrayList<String> options, int limit, String msg) {
         ArrayList<String> choices = new ArrayList<>();
 
-
-        //kør et while loop, så længe limit ikke er nået
         while (choices.size() < limit) {
             int input = this.promptNumeric(msg);
             if (input > 0 && input <= options.size()) {
@@ -104,7 +78,7 @@ public class TextUI {
                 return input;
             }
             else {
-                System.out.println("Not a valid choice");
+                System.out.println("Ikke et tal!");
             }
         }
     }

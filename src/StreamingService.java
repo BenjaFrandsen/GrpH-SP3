@@ -99,7 +99,7 @@ public class StreamingService {
                     users.add(user);
                 }
 
-            } else if (user != null && line.startsWith("WATCHED;")) {
+            } else if (user != null && line.startsWith("SET;")) {
                 String title = line.substring(8);
 
                 for (Media m : media) {
@@ -108,7 +108,7 @@ public class StreamingService {
                         break;
                     }
                 }
-            } else if (user != null && line.startsWith("SAVED;")) {
+            } else if (user != null && line.startsWith("GEMT;")) {
                 String title = line.substring(6);
 
                 for (Media m : media) {
@@ -241,11 +241,11 @@ public class StreamingService {
 
         int seasonChoice = ui.promptMenuChoice(
                 seasonOptions,
-                "Choose a season for " + series.getTitle()
+                "Vælg en sæson for " + series.getTitle()
         );
 
         if (seasonChoice < 1 || seasonChoice > series.getSeasons().size()) {
-            ui.displayMessage("Invalid season");
+            ui.displayMessage("Ugyldig sæson");
             return;
         }
 
@@ -269,7 +269,7 @@ public class StreamingService {
         );
 
         if (episodeChoice < 1 || episodeChoice > season.getEpisodes().size()) {
-            ui.displayMessage("Invalid episode");
+            ui.displayMessage("Ugyldig episode");
             return;
         }
 
@@ -282,7 +282,7 @@ public class StreamingService {
     public void playEpisode(Episode episode) {
 
         ui.displayMessage(
-                "Now playing episode " + episode.getEpisodeNumber()
+                "Afspiller episoden: " + episode.getEpisodeNumber()
         );
     }
 
@@ -355,7 +355,7 @@ public class StreamingService {
         for (Media m: results) {
             texts.add(m.toString());
         }
-        ui.displayMessage(texts, "Results - " + results.size());
+        ui.displayMessage(texts, "Resultater - " + results.size());
     }
 
     public void loadMedia() {
@@ -363,7 +363,7 @@ public class StreamingService {
         ArrayList<String> seriesLines = io.readData("data/series.csv");
 
         if (movieLines.isEmpty() && seriesLines.isEmpty()) {
-            ui.displayMessage("Could not read movies & series from file");
+            ui.displayMessage("Kunne indlæse film & serier fra fil");
             return;
         }
 
@@ -374,7 +374,7 @@ public class StreamingService {
             try {
                 media.add(parseMovie(line));
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Skipping current movie " + line);
+                System.out.println("Springer filme over " + line);
             }
         }
 
@@ -385,14 +385,14 @@ public class StreamingService {
             try {
                 media.add(parseSeries(line));
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Skipping current series " + line);
+                System.out.println("springer serien over " + line);
             }
         }
 
     }
 
     public ArrayList<Media> searchByTitle() {
-        String search = ui.promptText("Enter title").trim();
+        String search = ui.promptText("Skriv en titel").trim();
         ArrayList<Media> results = new ArrayList<>();
         for (Media m: media) {
             if (m.getTitle().toLowerCase().contains(search.toLowerCase())) {
@@ -404,7 +404,7 @@ public class StreamingService {
     }
 
     public ArrayList<Media> searchByCategory() {
-        String search = ui.promptText("Enter category ").trim();
+        String search = ui.promptText("Skriv en kategori").trim();
         ArrayList<Media> results = new ArrayList<>();
         for (Media m: media) {
             if (m.hasCategory(search)) {
@@ -416,7 +416,7 @@ public class StreamingService {
     }
 
     public ArrayList<Media> searchByRating() {
-        String text = ui.promptText("Type minimum rating").trim().replace(",", ".");
+        String text = ui.promptText("Skriv en minimum bedømmelse").trim().replace(",", ".");
         ArrayList<Media> results = new ArrayList<>();
         try {
             double minRating = Double.parseDouble(text);
@@ -426,7 +426,7 @@ public class StreamingService {
                 }
             }
         } catch (NumberFormatException e) {
-            ui.displayMessage("Unavaillable rating");
+            ui.displayMessage("Utilgængelig film bedømmelse");
             return results;
         }
         showResults(results);
@@ -442,22 +442,22 @@ public class StreamingService {
     private void saveMedia(Media media) {
         try {
             currentUser.addToSaved(media);
-            System.out.println(media.getTitle() + " Has been added to your saved media!");
+            System.out.println(media.getTitle() + " er blevet gemt til gemte medier!");
         } catch (Exception e) {
-            System.out.println("Unknown error when saving media");
+            System.out.println("Ukendt fejl");
         }
 
     }
 
     private void showSaved() {
-        System.out.println("Here are your saved shows:");
+        System.out.println("Dine gemte film & serier:");
         for(Media media : currentUser.getSaved()) {
             System.out.println(media.getTitle());
         }
     }
 
     private void showWatched() {
-        System.out.println("Here are your watched shows:");
+        System.out.println("Dine sete film & serier:");
         for(Media media : currentUser.getWatched()) {
             System.out.println(media.getTitle());
         }

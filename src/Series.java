@@ -21,11 +21,11 @@ public class Series extends Media {
     public String toString(){
         String stillAiring;
         if(endYear ==-1) {
-            stillAiring = "still airing";
+            stillAiring = "Kører stadig";
         } else {
-            stillAiring = "ended" + endYear;
+            stillAiring = "sluttede " + endYear;
         }
-        return super.toString() + " - " + stillAiring + " - " + seasons.size() + " seasons ";
+        return super.toString() + " - " + stillAiring + " - " + seasons.size() + " sæsoner ";
     }
 
 

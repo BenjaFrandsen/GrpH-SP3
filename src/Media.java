@@ -43,10 +43,10 @@ public abstract class Media {
     @Override
     public String toString() {
         return "Media" +
-                "title='" + title + '\'' +
-                ", releaseYear=" + releaseYear +
-                ", rating=" + rating +
-                ", categories=" + categories;
+                "titel - " + title + '\'' +
+                ", udgivelses år - " + releaseYear +
+                ", bedømmelse - " + rating +
+                ", kategorier - " + categories;
 
     }
 }
